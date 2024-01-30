@@ -1,0 +1,43 @@
+version: '3.9'
+services:
+  php-fpm:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ./app:/var/www/html
+  
+  apache-httpd:
+    build:
+      context: .
+      dockerfile: ./apache/Dockerfile
+    volumes:
+      - ./app:/var/www/html
+    ports:
+      - "8080:80"
+    depends_on:
+      - php-fpm
+  
+  mysql-db:
+    image: mysql:8.0.36-debian
+    environment:
+      MYSQL_ROOT_PASSWORD: test
+      MYSQL_DATABASE: libre
+      MYSQL_USER: test
+      MYSQL_PASSWORD: test
+    ports:
+      - "3306:3306"
+  
+  node:
+    build:
+      context: .
+      dockerfile: ./node/Dockerfile
+    ports:
+      - '3000:3000'
+    stdin_open: true
+    tty: true
+    depends_on:
+      - mysql-db
+        
+  
+    
