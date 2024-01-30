@@ -15,5 +15,5 @@ const query2 = await connection.query("insert into notes values ('WONDERLAND', '
 
 const result = await connection.query("select * from notes");
 const rows = result[0]
-console.loog(rows)
+console.log(rows)
 

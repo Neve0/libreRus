@@ -20,13 +20,15 @@ services:
   
   mysql-db:
     image: mysql:8.0.36-debian
+    volumes:
+      - ./db/data.sql:/docker-entrypoint-initdb.d/data.sql
     environment:
       MYSQL_ROOT_PASSWORD: test
-      MYSQL_DATABASE: libre
+      MYSQL_DATABASE: projects 
       MYSQL_USER: test
       MYSQL_PASSWORD: test
     ports:
-      - "3306:3306"
+      - "3307:3306"
   
   node:
     build:
