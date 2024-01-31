@@ -20,6 +20,8 @@ services:
   
   mysql-db:
     image: mysql:8.0.36-debian
+    security_opt:
+      - seccomp:unconfined
     volumes:
       - ./db/data.sql:/docker-entrypoint-initdb.d/data.sql
     environment:

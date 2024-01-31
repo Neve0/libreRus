@@ -1,19 +1,38 @@
-let main = require('mysql');
-let db_connected = false;
+const mysql = require('mysql2/promise')
+const express = require('express')()
 
-let connection = main.createPool({
-    host     : '127.0.0.1',
-    port     : '/var/run/mysqld/mysqld.sock',
-    user     : 'test',
-    password : 'test',
-    database : 'libre'
-}).promise();
+express.listen(3000, () => {
+    console.log('CONNECTED ON PORT 3000')
+})
 
-const query = await connection.query("create table notes (title VARCHAR(255))");
+function queryTest() {
+    const connection = mysql.createPool({
+        host     : 'mysql-db',
+        port     : '3306',
+        user     : 'test',
+        password : 'test',
+        database : 'projects',
+    });
+    
 
-const query2 = await connection.query("insert into notes values ('WONDERLAND', 'FORSEN')")
+    express.get('/', (req, res) => {
+        connection.query("UPDATE libre SET imagem = 'https://m.media-amazon.com/images/I/51L7aRvbU-L._SL1322_.jpg' WHERE isbn=1545621;")
 
-const result = await connection.query("select * from notes");
-const rows = result[0]
-console.log(rows)
+        result = connection.query('SELECT * FROM libre').then((query) => {
+            res.send(query)
+            console.log(query)
+        })
+    })
+    
+}
+
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+  
+sleep(0).then(() => { 
+    console.log('Node server is running')
+    queryTest() 
+});
+  
 

@@ -1,0 +1,23 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: system-ui;
+}
+
+.products div{
+    background-color: blue;
+    display: flex;
+}
+
+
+.products .book .fix {
+    display: grid;
+    padding-left: 14px;
+    margin-bottom: 5px;
+}
+
+.products .book .fix .isbn {
+    padding-left: 14px;
+    font-size: 10px;
+}
