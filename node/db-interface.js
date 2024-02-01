@@ -16,8 +16,6 @@ function queryTest() {
     
 
     express.get('/', (req, res) => {
-        connection.query("UPDATE libre SET imagem = 'https://m.media-amazon.com/images/I/51L7aRvbU-L._SL1322_.jpg' WHERE isbn=1545621;")
-
         result = connection.query('SELECT * FROM libre').then((query) => {
             res.send(query)
             console.log(query)

@@ -12,20 +12,21 @@
         $products = json_decode($result);
     ?>
 
-    <div class=products>
-        <?php foreach($products[0] as $book): ?>
-            <div class=book>
-                <img src=<?php echo $book->imagem?> width="100" height="100">
-                <div class='fix'>
-                    <p class=isbn><?php echo $book->isbn?></p>
-                    <div class=info>
+    <header>BOOKS</header>
+    <div class=wrapper>
+        <div class=products>
+            <?php foreach($products[0] as $book): ?>
+                <div class=book>
+                    <img src=<?php echo $book->imagem?> width="100" height="100">
+                    <div class=text>
+                        <p style="font-size: 10px"><?php echo $book->isbn?></p>
                         <p><?php echo $book->titulo?></p>
                         <p><?php echo $book->autor?></p>
                         <p><?php echo "R$ " . $book->preco?></p>
                     </div>
                 </div>
-            </div>
-        <?php endforeach; ?>
+            <?php endforeach; ?>
+        </div>
     </div>
 </body>
 </html>
