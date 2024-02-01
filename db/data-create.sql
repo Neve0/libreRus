@@ -1,3 +1,5 @@
+#comandos responsáveis sobre a estrutura da tabela
+
 CREATE TABLE libre (
     isbn   VARCHAR(30) NOT NULL PRIMARY KEY,
     titulo VARCHAR(80),

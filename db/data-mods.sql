@@ -1,3 +1,5 @@
+#comandos responsáveis pela manipulação de dados da tabela
+
 INSERT INTO libre VALUES 
     ( 
         '979-8748708180',
