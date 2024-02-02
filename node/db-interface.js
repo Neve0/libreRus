@@ -1,5 +1,7 @@
 const mysql = require('mysql2/promise')
 const express = require('express')()
+require('dotenv').config()
+
 
 express.listen(3000, () => {
     console.log('CONNECTED ON PORT 3000')
@@ -9,8 +11,8 @@ function queryTest() {
     const connection = mysql.createPool({
         host     : 'mysql-db',
         port     : '3306',
-        user     : 'test',
-        password : 'test',
+        user     : 'root',
+        password : process.env.DB_PASSWORD,
         database : 'projects',
     });
     

@@ -6,6 +6,9 @@ services:
       dockerfile: Dockerfile
     volumes:
       - ./app:/var/www/html
+    depends_on:
+      mysql-db:
+        condition: service_healthy
   
   apache-httpd:
     build:
@@ -25,11 +28,11 @@ services:
     volumes:
       - ./db/data-create.sql:/docker-entrypoint-initdb.d/data-create.sql
       - ./db/data-mods.sql:/docker-entrypoint-initdb.d/data-mods.sql
+    env_file:
+      - ./.env
     environment:
-      MYSQL_ROOT_PASSWORD: test
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
       MYSQL_DATABASE: projects 
-      MYSQL_USER: test
-      MYSQL_PASSWORD: test
     ports:
       - "3307:3306"
     healthcheck:
