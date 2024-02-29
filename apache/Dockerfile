@@ -5,8 +5,6 @@ COPY ./apache/apache.vhost.conf /usr/local/apache2/conf/extra/apache.vhost.conf
 
 # Enable Apache modules to ensure proper functionality
 RUN sed -i \
-   # Uncomment the configuration for mod_deflate to enable compression
-    -e '/#LoadModule deflate_module/s/^#//g' \
     # Uncomment the configuration for mod_proxy to enable proxying capabilities
     -e '/#LoadModule proxy_module/s/^#//g' \
     # Uncomment the configuration for mod_proxy_fcgi to enable FastCGI proxy module
