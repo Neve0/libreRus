@@ -1,9 +1,7 @@
 version: '3.9'
 services:
   php-fpm:
-    build:
-      context: .
-      dockerfile: Dockerfile
+    image: php:7.2-fpm
     volumes:
       - ./app:/var/www/html
     depends_on:
@@ -23,15 +21,15 @@ services:
   
   mysql-db:
     image: mysql:8.0.36-debian
-    security_opt:
-      - seccomp:unconfined
     volumes:
       - ./db/data-create.sql:/docker-entrypoint-initdb.d/data-create.sql
       - ./db/data-mods.sql:/docker-entrypoint-initdb.d/data-mods.sql
     env_file:
       - ./.env
     environment:
-      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      MYSQL_USER: ${DB_USERNAME}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+      MYSQL_RANDOM_ROOT_PASSWORD: true
       MYSQL_DATABASE: projects 
     ports:
       - "3307:3306"
@@ -46,8 +44,6 @@ services:
       dockerfile: ./node/Dockerfile
     ports:
       - '3000:3000'
-    stdin_open: true
-    tty: true
     depends_on:
       mysql-db:
         condition: service_healthy
